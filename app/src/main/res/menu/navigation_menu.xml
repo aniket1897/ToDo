@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/notes"
+        android:icon="@mipmap/ic_note_black_24dp"
+        android:title="My Notes"/>
+
+    <item android:id="@+id/archive"
+        android:icon="@mipmap/ic_archive_black_24dp"
+        android:title="Archived"/>
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@mipmap/ic_delete_black_24dp"
+        android:title="Deleted" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Settings" />
+
+
+</menu>
