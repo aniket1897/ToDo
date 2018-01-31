@@ -93,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String r=showPopUp(view);
-                        notes.add(r);
-                        myAdapter.notifyDataSetChanged();
+                       Log.d("MainActivity.this","Here!!!");
+                        startActivity(new Intent(MainActivity.this,NotesAdd.class));
+
                     }
                 }
         );
@@ -110,52 +110,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public String showPopUp(View v)
-    {
-
-        mDialog.setContentView(R.layout.notes_add);
-        TextView txt;
-
-        Button mbutton;
-
-        final EditText text_title,text_desc;
-        text_title=mDialog.findViewById(R.id.txt_title);
-        text_desc=mDialog.findViewById(R.id.txt_description);
-
-        mbutton=mDialog.findViewById(R.id.submit);
-
-        txt=mDialog.findViewById(R.id.txt_close);
-
-        txt.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mDialog.dismiss();
-                    }
-                }
-        );
-
-        mbutton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        title=text_title.getText().toString();
-                        desc=text_desc.getText().toString();
-                        mDialog.dismiss();
-
-                       /* Snackbar snk=Snackbar.make(myLayout,title,Snackbar.LENGTH_LONG);
-                        snk.show();*/
-                    }
-                }
-        );
-
-
-        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mDialog.show();
-        return title ;
-
     }
 
 
