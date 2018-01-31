@@ -10,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
@@ -28,23 +30,27 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
    private DrawerLayout mDrawer;
    private ActionBarDrawerToggle mToggle;
-
    private Toolbar mToolbar;
 
-   private ListView myList;
 
    private LinearLayout myLayout;
 
    private FloatingActionButton fbutton;
 
-   private String title,desc;
+  // private String title,desc;
 
-   private Dialog mDialog;
+   RecyclerView recyclerView;
+
+   List<Notes> notes;
+
+   NotesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         fbutton=findViewById(R.id.fbutton);
 
-        mDialog=new Dialog(this);
+        recyclerView=findViewById(R.id.recycler_view);
 
         myLayout=findViewById(R.id.myLayout);
 
@@ -66,30 +72,32 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        myList=findViewById(R.id.myList);
+        notes=new ArrayList<>();
 
-        final ArrayList<String> notes=new ArrayList<String>(
-                Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final ArrayAdapter myAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,notes);
-        myList.setAdapter(myAdapter);
+        recyclerView.setHasFixedSize(true);
 
 
-        myList.setOnItemClickListener(
-                new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        String note=String.valueOf(adapterView.getItemAtPosition(i));
-                        String fg="You Clicked "+note+" !!";
-                        Snackbar snk=Snackbar.make(myLayout,fg,Snackbar.LENGTH_LONG);
-                        snk.show();
-
-                    }
-                }
+        notes.add(
+          new Notes("My first post","I like reading!!")
         );
 
-        fbutton.setOnClickListener(
+        notes.add(
+                new Notes("My first post","I like reading!!")
+        );
+
+        notes.add(
+                new Notes("My first post","I like reading!!")
+        );
+
+
+        adapter=new NotesAdapter(this,notes);
+
+        recyclerView.setAdapter(adapter);
+
+
+       fbutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
