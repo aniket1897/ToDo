@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.aniket.todo.MainActivity"
-    android:id="@+id/drawerLayout">
+    android:id="@+id/drawerLayout"
+    android:background="@color/backgrounnd_notes">
 
 
     <LinearLayout
@@ -38,7 +39,7 @@
             android:layout_height="56dp"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="@color/colorPrimaryDark"
+            app:backgroundTint="@color/sec_color"
             android:src="@drawable/ic_add_white_24dp"
             android:id="@+id/fbutton"
             />
