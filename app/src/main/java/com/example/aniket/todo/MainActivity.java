@@ -1,6 +1,7 @@
 package com.example.aniket.todo;
 
 import android.app.Dialog;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
    RecyclerView recyclerView;
 
-   List<Notes> notes;
+
 
    NotesAdapter adapter;
 
@@ -72,27 +73,20 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        notes=new ArrayList<>();
+
+
+        AppDatabase db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"production")
+                .allowMainThreadQueries()
+                .build();
+
+        List<Notes> notes=db.notesDAO().getAllNotes();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter=new NotesAdapter(this,notes);
+
         recyclerView.setHasFixedSize(true);
 
-
-        notes.add(
-          new Notes("My first post","I like reading!!")
-        );
-
-        notes.add(
-                new Notes("My first post","I like reading!!")
-        );
-
-        notes.add(
-                new Notes("My first post","I like reading!!")
-        );
-
-
-        adapter=new NotesAdapter(this,notes);
 
         recyclerView.setAdapter(adapter);
 
@@ -101,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       Log.d("MainActivity.this","Here!!!");
                         startActivity(new Intent(MainActivity.this,NotesAdd.class));
 
                     }
