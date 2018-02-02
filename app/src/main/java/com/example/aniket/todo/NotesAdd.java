@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,6 +29,12 @@ public class NotesAdd extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
+        if(getSupportActionBar() !=null)
+        {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         mTitle=findViewById(R.id.txt_title);
 
         mDesc=findViewById(R.id.txt_desc);
@@ -37,7 +44,6 @@ public class NotesAdd extends AppCompatActivity {
         final AppDatabase db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"production")
                 .allowMainThreadQueries()
                 .build();
-
 
 
         submit.setOnClickListener(
@@ -54,5 +60,12 @@ public class NotesAdd extends AppCompatActivity {
         );
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 }
