@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -35,20 +36,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-   private DrawerLayout mDrawer;
-   private ActionBarDrawerToggle mToggle;
-   private Toolbar mToolbar;
+    private static final String TAG = "MainActivtiy";
+    private DrawerLayout mDrawer;
 
+   private ActionBarDrawerToggle mToggle;
+
+   private Toolbar mToolbar;
 
    private LinearLayout myLayout;
 
    private FloatingActionButton fbutton;
 
-  // private String title,desc;
-
    RecyclerView recyclerView;
-
-
 
    NotesAdapter adapter;
 
@@ -103,15 +102,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         getMenuInflater().inflate(R.menu.nav_menu,menu);
+         return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
+        Log.d(TAG,"Clicked");
+        switch (item.getItemId())
+        {
+            case R.id.settings: Log.d(TAG,"Clicked Settings");
+                new Intent(MainActivity.this,SettingsActivity.class); break;
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
+*/
+   @Override
+   public boolean onOptionsItemSelected(MenuItem item) {
+       if(mToggle.onOptionsItemSelected(item)) {
+           return true;
+       }
 
+       return super.onOptionsItemSelected(item);
+   }
 
 }
