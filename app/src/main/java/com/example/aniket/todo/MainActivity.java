@@ -5,7 +5,9 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,9 +36,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivtiy";
+
     private DrawerLayout mDrawer;
 
    private ActionBarDrawerToggle mToggle;
@@ -72,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        NavigationView navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         AppDatabase db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"production")
                 .allowMainThreadQueries()
@@ -102,24 +106,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.nav_menu,menu);
-         return true;
-    }
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        Log.d(TAG,"Clicked");
-        switch (item.getItemId())
+        int item_id=item.getItemId();
+        switch (item_id)
         {
-            case R.id.settings: Log.d(TAG,"Clicked Settings");
-                new Intent(MainActivity.this,SettingsActivity.class); break;
+            case R.id.my_notes: Toast.makeText(MainActivity.this,"Clicked Settings",Toast.LENGTH_LONG).show(); break;
+            case R.id.archive: Toast.makeText(MainActivity.this,"Clicked Settings",Toast.LENGTH_LONG).show(); break;
+            case R.id.delete: Toast.makeText(MainActivity.this,"Clicked Settings",Toast.LENGTH_LONG).show(); break;
+            case R.id.settings: //Toast.makeText(MainActivity.this,"Clicked Settings",Toast.LENGTH_LONG).show(); break;
+                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+            case R.id.share: Toast.makeText(MainActivity.this,"Clicked Settings",Toast.LENGTH_LONG).show(); break;
         }
         return true;
     }
-*/
+
+    /* @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+             getMenuInflater().inflate(R.menu.nav_menu,menu);
+             return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+
+            Log.d(TAG,"Clicked");
+            switch (item.getItemId())
+            {
+                case R.id.settings: Log.d(TAG,"Clicked Settings");
+                    new Intent(MainActivity.this,SettingsActivity.class); break;
+            }
+            return true;
+        }
+    */
    @Override
    public boolean onOptionsItemSelected(MenuItem item) {
        if(mToggle.onOptionsItemSelected(item)) {
