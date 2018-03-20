@@ -122,24 +122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    /* @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-             getMenuInflater().inflate(R.menu.nav_menu,menu);
-             return true;
-        }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
 
-            Log.d(TAG,"Clicked");
-            switch (item.getItemId())
-            {
-                case R.id.settings: Log.d(TAG,"Clicked Settings");
-                    new Intent(MainActivity.this,SettingsActivity.class); break;
-            }
-            return true;
-        }
-    */
    @Override
    public boolean onOptionsItemSelected(MenuItem item) {
        if(mToggle.onOptionsItemSelected(item)) {
